@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "name": "鹤望兰·暮光共鸣",
+  "author": "",
+  "description": "DARLING IN THE FRANXX / Strelizia 机甲主题。由提供的海报提取暮紫、暖橙与装甲银白，去除上下黑边后作为背景；左侧保留鹤望兰签名栏，右侧为标题、歌单与点歌操作区。直播歌单采用独立钢蓝深色配色。未使用独立透明立绘。",
+  "version": "1.0.0",
+  "template": "rose-nocturne",
+  "colors": {
+    "background": "#100F1B",
+    "card": "#242032",
+    "input": "#302A40",
+    "text": "#FFF4E7",
+    "secondary": "#DDC9D6",
+    "muted": "#BFB0C8",
+    "accent": "#FFB963",
+    "button": "#FFCF8B",
+    "buttonText": "#261627",
+    "border": "#71617F"
+  },
+  "text": {
+    "name": "鹤望兰",
+    "signature": "Strelizia",
+    "heading": "暮光之下，与你共鸣。",
+    "subtitle": "让旋律穿过云海，让心跳与鹤望兰同频。",
+    "eyebrow": "DARLING IN THE FRANXX / STRELIZIA",
+    "motto": "TWO HEARTS. ONE RESONANCE.",
+    "vertical": "",
+    "sceneNumber": "",
+    "sceneTitle": "",
+    "sectionNumber": ""
+  },
+  "character": {
+    "image": "",
+    "scale": 1,
+    "x": 50,
+    "y": 0,
+    "flip": false,
+    "visible": false
+  },
+  "background": {
+    "image": "assets/9de3874fa1b50f318794acd6169fc1b3.webp",
+    "dim": 0.37,
+    "scale": 1.45,
+    "x": -261,
+    "y": -52
+  },
+  "layout": {
+    "characterSide": "left",
+    "characterRatio": 0.28,
+    "introHeight": 100,
+    "cardOpacity": 0.97
+  },
+  "decorations": {
+    "glow": 0.14,
+    "rings": false,
+    "fade": 0,
+    "signature": true
+  },
+  "capture": {
+    "background": "#0E1823",
+    "card": "#1C2A39",
+    "fontSize": 14,
+    "compact": true
+  },
+  "id": "strelizia-twilight-resonance",
+  "fonts": {
+    "name": "",
+    "signature": "",
+    "heading": "",
+    "subtitle": "",
+    "eyebrow": "",
+    "motto": "",
+    "vertical": "",
+    "sceneNumber": "",
+    "sceneTitle": "",
+    "sectionNumber": ""
+  }
+}

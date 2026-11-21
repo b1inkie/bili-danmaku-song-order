@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "name": "我的主题 · 制作草稿",
+  "author": "",
+  "description": "",
+  "version": "1.0.0",
+  "template": "rose-nocturne",
+  "colors": {
+    "background": "#110e14",
+    "card": "#201820",
+    "input": "#2a2028",
+    "text": "#f5e9dc",
+    "secondary": "#c7acaf",
+    "muted": "#a38690",
+    "accent": "#dc8c9b",
+    "button": "#edd7c2",
+    "buttonText": "#39202b",
+    "border": "#4c333e"
+  },
+  "text": {
+    "name": "这里是名字",
+    "signature": "这里是签名",
+    "heading": "这里是主标题",
+    "subtitle": "这里是副标题",
+    "eyebrow": "这里是引导语",
+    "motto": "这里是签名说明",
+    "vertical": "这里是竖排文案",
+    "sceneNumber": "01",
+    "sceneTitle": "这里是主题名",
+    "sectionNumber": "01"
+  },
+  "fonts": {
+    "name": "",
+    "signature": "",
+    "heading": "",
+    "subtitle": "",
+    "eyebrow": "",
+    "motto": "",
+    "vertical": "",
+    "sceneNumber": "",
+    "sceneTitle": "",
+    "sectionNumber": ""
+  },
+  "character": {
+    "image": "assets/character.png",
+    "scale": 1,
+    "x": 50,
+    "y": 0,
+    "flip": false,
+    "visible": true
+  },
+  "background": {
+    "scale": 1,
+    "x": 0,
+    "y": 0,
+    "image": "",
+    "dim": 0.65
+  },
+  "layout": {
+    "characterSide": "left",
+    "characterRatio": 0.43,
+    "introHeight": 118,
+    "cardOpacity": 0.72
+  },
+  "decorations": {
+    "glow": 0.3,
+    "rings": true,
+    "fade": 0.9,
+    "signature": true
+  },
+  "capture": {
+    "background": "#1b141e",
+    "card": "#2b1b28",
+    "fontSize": 14,
+    "compact": false
+  },
+  "id": "rose-nocturne-template"
+}

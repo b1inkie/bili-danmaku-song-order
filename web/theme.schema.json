@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Songdesk Theme v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "template"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,47}$"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 40,
+      "default": "我的主题"
+    },
+    "author": {
+      "type": "string",
+      "maxLength": 60,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 300,
+      "default": ""
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 30,
+      "default": "1.0.0"
+    },
+    "template": {
+      "const": "rose-nocturne"
+    },
+    "colors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "background": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#110e14"
+        },
+        "card": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#201820"
+        },
+        "input": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#2a2028"
+        },
+        "text": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#f5e9dc"
+        },
+        "secondary": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#c7acaf"
+        },
+        "muted": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#a38690"
+        },
+        "accent": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#dc8c9b"
+        },
+        "button": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#edd7c2"
+        },
+        "buttonText": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#39202b"
+        },
+        "border": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#4c333e"
+        }
+      },
+      "default": {}
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 24,
+          "default": "这里是名字"
+        },
+        "signature": {
+          "type": "string",
+          "maxLength": 32,
+          "default": "这里是签名"
+        },
+        "heading": {
+          "type": "string",
+          "maxLength": 32,
+          "default": "这里是主标题"
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 60,
+          "default": "这里是副标题"
+        },
+        "eyebrow": {
+          "type": "string",
+          "maxLength": 60,
+          "default": "这里是引导语"
+        },
+        "motto": {
+          "type": "string",
+          "maxLength": 80,
+          "default": "这里是签名说明"
+        }
+,
+        "vertical": {"type": "string", "maxLength": 60, "default": ""},
+        "sceneNumber": {"type": "string", "maxLength": 12, "default": ""},
+        "sceneTitle": {"type": "string", "maxLength": 60, "default": ""},
+        "sectionNumber": {"type": "string", "maxLength": 12, "default": ""}
+      },
+      "default": {}
+    },
+    "fonts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "pattern": "^[^\\x00-\\x1f\\x7f]*$",
+          "default": ""
+        },
+        "signature": {
+          "type": "string",
+          "maxLength": 100,
+          "pattern": "^[^\\x00-\\x1f\\x7f]*$",
+          "default": ""
+        },
+        "heading": {
+          "type": "string",
+          "maxLength": 100,
+          "pattern": "^[^\\x00-\\x1f\\x7f]*$",
+          "default": ""
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 100,
+          "pattern": "^[^\\x00-\\x1f\\x7f]*$",
+          "default": ""
+        },
+        "eyebrow": {
+          "type": "string",
+          "maxLength": 100,
+          "pattern": "^[^\\x00-\\x1f\\x7f]*$",
+          "default": ""
+        },
+        "motto": {
+          "type": "string",
+          "maxLength": 100,
+          "pattern": "^[^\\x00-\\x1f\\x7f]*$",
+          "default": ""
+        }
+,
+        "vertical": {"type": "string", "maxLength": 100, "pattern": "^[^\\x00-\\x1f\\x7f]*$", "default": ""},
+        "sceneNumber": {"type": "string", "maxLength": 100, "pattern": "^[^\\x00-\\x1f\\x7f]*$", "default": ""},
+        "sceneTitle": {"type": "string", "maxLength": 100, "pattern": "^[^\\x00-\\x1f\\x7f]*$", "default": ""},
+        "sectionNumber": {"type": "string", "maxLength": 100, "pattern": "^[^\\x00-\\x1f\\x7f]*$", "default": ""}
+      },
+      "default": {}
+    },
+    "character": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "image": {
+          "type": "string",
+          "pattern": "^$|^assets/[A-Za-z0-9_-]+\\.(png|jpg|jpeg|webp)$",
+          "maxLength": 160,
+          "default": ""
+        },
+        "scale": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 1.6,
+          "default": 1
+        },
+        "x": {
+          "type": "number",
+          "minimum": 15,
+          "maximum": 85,
+          "default": 50
+        },
+        "y": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 100,
+          "default": 0
+        },
+        "flip": {
+          "type": "boolean",
+          "default": false
+        },
+        "visible": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "default": {}
+    },
+    "background": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "image": {
+          "type": "string",
+          "pattern": "^$|^assets/[A-Za-z0-9_-]+\\.(png|jpg|jpeg|webp)$",
+          "maxLength": 160,
+          "default": ""
+        },
+        "dim": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.65
+        },
+        "scale": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 3,
+          "default": 1
+        },
+        "x": {
+          "type": "number",
+          "minimum": -1000,
+          "maximum": 1000,
+          "default": 0
+        },
+        "y": {
+          "type": "number",
+          "minimum": -1000,
+          "maximum": 1000,
+          "default": 0
+        }
+      },
+      "default": {}
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "characterSide": {
+          "enum": [
+            "left",
+            "right"
+          ],
+          "default": "left"
+        },
+        "characterRatio": {
+          "type": "number",
+          "minimum": 0.28,
+          "maximum": 0.43,
+          "default": 0.43
+        },
+        "introHeight": {
+          "type": "number",
+          "minimum": 90,
+          "maximum": 140,
+          "default": 118
+        },
+        "cardOpacity": {
+          "type": "number",
+          "minimum": 0.4,
+          "maximum": 1,
+          "default": 0.72
+        }
+      },
+      "default": {}
+    },
+    "decorations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "glow": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.3
+        },
+        "rings": {
+          "type": "boolean",
+          "default": true
+        },
+        "fade": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.9
+        },
+        "signature": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "default": {}
+    },
+    "capture": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "background": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#1b141e"
+        },
+        "card": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "default": "#2b1b28"
+        },
+        "fontSize": {
+          "type": "number",
+          "minimum": 12,
+          "maximum": 18,
+          "default": 14
+        },
+        "compact": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "default": {}
+    }
+  }
+}

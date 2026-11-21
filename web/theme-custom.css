@@ -1,0 +1,75 @@
+/* Fixed functional layout; theme data only changes bounded variables. */
+html[data-custom-theme] .haruka-name > span { font-family: var(--custom-font-name); }
+html[data-custom-theme] .haruka-name em { font-family: var(--custom-font-signature); }
+html[data-custom-theme] .haruka-intro h1 { font-family: var(--custom-font-heading); }
+html[data-custom-theme] .haruka-description { font-family: var(--custom-font-subtitle); }
+html[data-custom-theme] .haruka-eyebrow { font-family: var(--custom-font-eyebrow); }
+html[data-custom-theme] .haruka-name small { font-family: var(--custom-font-motto); }
+html[data-custom-theme] .haruka-vertical { font-family: var(--custom-font-vertical); }
+html[data-custom-theme] .haruka-scene-number .scene-index { font-family: var(--custom-font-sceneNumber); }
+html[data-custom-theme] .haruka-scene-number .scene-title { font-family: var(--custom-font-sceneTitle); }
+html[data-custom-theme] .haruka-section-no { font-family: var(--custom-font-sectionNumber); }
+html[data-custom-theme] #app {
+  grid-template-columns: var(--custom-ratio) minmax(0,1fr);
+  grid-template-rows: 55px var(--custom-intro) minmax(180px,1fr) auto 20px;
+  background: radial-gradient(ellipse at 14% 44%, var(--custom-glow), transparent 55%),var(--custom-bg);
+}
+html[data-custom-theme] #app::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--custom-bg-image);
+  background-size: cover; background-position: center; background-repeat: no-repeat;
+  /* First fit image to the viewport, then scale around its center and translate.
+     Dim using a brightness filter so it doesn't leave an overlay rectangle. */
+  transform: translate(var(--custom-bg-x, 0px), var(--custom-bg-y, 0px)) scale(var(--custom-bg-scale, 1));
+  transform-origin: center;
+  filter: brightness(calc(1 - var(--custom-dim)));
+}
+html[data-custom-theme] #app::after { content: "MUSIC REQUEST"; color: var(--muted); }
+html[data-custom-theme] .haruka-scene { width: calc(var(--custom-ratio) - 18px); }
+html[data-custom-theme] .haruka-scene::before { background: radial-gradient(circle,var(--custom-glow),transparent 72%); }
+html[data-custom-theme] .haruka-scene::after { background: linear-gradient(0deg,var(--custom-bg),var(--custom-fade) 8%,transparent 38%); }
+html[data-custom-theme] .haruka-oc {
+  display: var(--custom-character); left: var(--custom-x);
+  bottom: calc(-190px + var(--custom-y));
+  transform: translateX(-50%) scale(var(--custom-scale)) scaleX(var(--custom-flip));
+  transform-origin: center bottom;
+}
+html[data-custom-theme] .haruka-name { display: var(--custom-signature); }
+html[data-custom-theme] .haruka-name > span { color: var(--text); }
+html[data-custom-theme] .haruka-name em { color: var(--accent); }
+html[data-custom-theme] .haruka-orbit { display: var(--custom-rings); border-color: var(--border); }
+html[data-custom-theme] .haruka-vertical, html[data-custom-theme] .haruka-name small,
+html[data-custom-theme] .haruka-description, html[data-custom-theme] .haruka-scene-number,
+html[data-custom-theme] .haruka-scene-number span { color: var(--muted); }
+html[data-custom-theme] .haruka-intro { min-width: 0; overflow: hidden; }
+html[data-custom-theme] .haruka-intro h1,
+html[data-custom-theme] .haruka-description,
+html[data-custom-theme] .haruka-eyebrow { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html[data-custom-theme] .panels, html[data-custom-theme] .actionbar { min-width: 0; }
+html[data-custom-theme] .haruka-eyebrow, html[data-custom-theme] .haruka-rule { color: var(--accent); }
+html[data-custom-theme] .haruka-eyebrow > span { background: var(--accent); }
+html[data-custom-theme] .windowbar { background: var(--custom-card-alpha); }
+html[data-custom-theme] .queue-panel, html[data-custom-theme] .actionbar { background: var(--custom-card-alpha); border-color: var(--border); }
+html[data-custom-theme] .panel-meta { color: var(--muted); }
+html[data-custom-theme] .request-inputs input { background: var(--card-2); border-color: var(--border); }
+html[data-custom-theme] .modal-card, html[data-custom-theme] .login-card, html[data-custom-theme] .song-detail-tip { background: var(--card); border-color: var(--border); }
+html[data-custom-theme] .q-icon, html[data-custom-theme] .login-logo { background: var(--accent-dim); color: var(--accent); }
+html[data-custom-theme][data-character-side="right"] #app { grid-template-columns: minmax(0,1fr) var(--custom-ratio); }
+html[data-custom-theme][data-character-side="right"] .haruka-intro,
+html[data-custom-theme][data-character-side="right"] .panels,
+html[data-custom-theme][data-character-side="right"] .actionbar { grid-column: 1; }
+html[data-custom-theme][data-character-side="right"] .haruka-scene { left: auto; right: 0; }
+html[data-custom-theme][data-character-side="right"] .haruka-scene::after { left: auto; right: 0; }
+html[data-custom-theme] .capture-shell { font-size: var(--capture-font,14px); }
+body[data-theme-compact="true"] .song { min-height: 34px; padding: 5px 8px; }
+body[data-theme-compact="true"] .song-detail,body[data-theme-compact="true"] #current-singer { display:none; }
+html[data-preview="true"] .windowbar,html[data-preview="true"] .actionbar,
+html[data-preview="true"] .capture-toolbar,html[data-preview="true"] .capture-titlebar { pointer-events: none; }
+html[data-preview="true"] .rh,html[data-preview="true"] .resize-edge { display: none; }
+html[data-preview="true"] #login-view { display: none !important; }
+@media(max-height:680px) {
+ html[data-custom-theme] #app { grid-template-rows:55px min(var(--custom-intro),100px) minmax(155px,1fr) auto 12px; }
+}
+@media(max-width:1000px) {
+ html[data-custom-theme] .haruka-scene { width:calc(var(--custom-ratio) - 5px); }
+}

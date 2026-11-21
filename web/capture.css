@@ -1,0 +1,59 @@
+:root { color-scheme: dark; --bg: #101015; --card: #1c1c25; --text: #f7f4f7; --muted: #b7afbf; --accent: #fb7299; --border: #ffffff16; --active: #fb729918; }
+:root[data-theme="light"] { color-scheme: light; --bg: #f8f6f8; --card: #fff; --text: #29232d; --muted: #766c7d; --accent: #c33c69; --border: #30203818; --active: #d9467910; }
+:root[data-theme="haruka"] { --bg: #1b141e; --card: #2b1b28; --text: #f8e9df; --muted: #c5a6ad; --accent: #e1a4ac; --border: #c7949233; --active: #b96c8128; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: "Microsoft YaHei UI", "Segoe UI", sans-serif; font-size: 14px; }
+.capture-shell { position: relative; display: flex; flex-direction: column; height: 100%; padding: 0 14px 14px; gap: 10px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg); overflow: hidden; }
+.current-card { flex: none; padding: 17px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); }
+.current-label { display: flex; gap: 8px; align-items: center; color: var(--accent); font-size: 12px; }
+.playing-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+body[data-playing="true"] .playing-dot { background: var(--accent); box-shadow: 0 0 9px var(--accent); }
+h1 { margin: 10px 0 5px; font-size: clamp(18px, 5vw, 26px); line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow-wrap: anywhere; }
+#current-singer { margin: 0; color: var(--muted); line-height: 1.5; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.list-head { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h2 { margin: 0; font-size: 14px; font-weight: 600; }
+#song-count { color: var(--muted); font-size: 12px; }
+#connection-note { flex: none; margin: -5px 0 0; font-size: 11px; color: var(--muted); }
+#songs { flex: 1; min-height: 0; margin: 0; padding: 0 3px 0 0; list-style: none; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.song { display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 9px 10px; border-radius: 9px; border: 1px solid transparent; }
+.song.current { background: var(--active); border-color: var(--border); }
+.song-number { flex: none; width: 24px; text-align: center; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--muted); }
+.current .song-number { color: var(--accent); }
+.song-info { min-width: 0; flex: 1; }
+.song-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5; }
+.song-detail { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 1.5; font-size: 11px; color: var(--muted); }
+.empty { padding: 26px 8px; text-align: center; color: var(--muted); font-size: 13px; }
+@media (max-height: 400px) { .capture-shell { padding: 0 10px 8px; gap: 5px; } .current-card { padding: 8px 10px; } h1 { font-size: 18px; margin-top: 3px; -webkit-line-clamp: 1; } .song { min-height: 40px; padding: 4px 8px; } .capture-toolbar { padding-top: 0; padding-bottom: 4px; } .current-label { font-size: 10px; } #current-singer { font-size: 11px; } }
+
+.hidden { display: none !important; }
+button, input { font: inherit; }
+button { cursor: pointer; color: var(--muted); }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.capture-titlebar { display: flex; align-items: center; gap: 8px; height: 35px; flex: none; margin: 0 -14px; padding: 0 14px; font-size: 11px; border-bottom: 1px solid var(--border); user-select: none; }
+.title-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.title-hint { margin-left: auto; color: var(--muted); opacity: .5; letter-spacing: .12em; font-size: 8px; }
+.capture-toolbar { display: flex; align-items: center; gap: 7px; flex: none; }
+.tool-button { height: 30px; min-width: 30px; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 0 7px; border: 1px solid var(--border); border-radius: 9px; background: var(--card); font-size: 11px; }
+.tool-button:hover, .tool-button[aria-pressed="true"], .tool-button[aria-expanded="true"] { color: var(--accent); background: var(--active); border-color: var(--accent); }
+.tool-hide { margin-left: auto; }
+.toolbar-divider { height: 16px; width: 1px; background: var(--border); }
+.ui-icon { display: block; width: 15px; height: 15px; pointer-events: none; flex: none; }
+.opacity-panel { position: absolute; top: 78px; left: 14px; right: 14px; padding: 14px; z-index: 20; background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 12px 35px #0005; }
+.opacity-panel label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.opacity-panel output { color: var(--accent); font-variant-numeric: tabular-nums; }
+#opacity-range { width: 100%; margin: 15px 0 12px; accent-color: var(--accent); }
+.opacity-presets { display: flex; gap: 8px; }
+.opacity-presets button { flex: 1; border: 1px solid var(--border); border-radius: 7px; padding: 5px; background: var(--bg); font-size: 11px; }
+.opacity-presets button:hover { color: var(--accent); }
+body[data-compact="true"] .song { min-height: 34px; padding: 5px 8px; }
+body[data-compact="true"] .song-detail, body[data-compact="true"] #current-singer { display: none; }
+#tool-message { position: absolute; bottom: 12px; left: 12px; right: 12px; margin: 0; border-radius: 8px; background: var(--card); color: var(--accent); font-size: 11px; z-index: 30; }
+#tool-message:not(:empty) { padding: 9px 10px; border: 1px solid var(--border); }
+.resize-edge { position: absolute; z-index: 40; }
+.edge-s { bottom: 0; left: 12px; right: 12px; height: 5px; cursor: ns-resize; }
+.edge-w, .edge-e { top: 12px; bottom: 12px; width: 5px; cursor: ew-resize; }
+.edge-w { left: 0; } .edge-e { right: 0; }
+.edge-nw, .edge-ne, .edge-sw, .edge-se { width: 11px; height: 11px; }
+.edge-nw { top: 0; left: 0; cursor: nwse-resize; } .edge-ne { top: 0; right: 0; cursor: nesw-resize; }
+.edge-sw { bottom: 0; left: 0; cursor: nesw-resize; } .edge-se { bottom: 0; right: 0; cursor: nwse-resize; }

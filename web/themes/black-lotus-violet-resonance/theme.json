@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "name": "黑睡莲·紫锋共振",
+  "author": "",
+  "description": "以《加速世界》Black Lotus 立绘为视觉核心：曜黑装甲、冷钢银白与紫色能量光。左侧人物装饰，右侧标题、歌单与点歌操作；直播歌单使用独立暗紫配色。",
+  "version": "1.0.1",
+  "template": "rose-nocturne",
+  "colors": {
+    "background": "#090A10",
+    "card": "#171B25",
+    "input": "#252735",
+    "text": "#EDF0FA",
+    "secondary": "#C0B9D2",
+    "muted": "#A39EB7",
+    "accent": "#D17AFF",
+    "button": "#D17AFF",
+    "buttonText": "#16091F",
+    "border": "#52576F"
+  },
+  "text": {
+    "name": "",
+    "signature": "Black Lotus",
+    "heading": "终结之剑",
+    "subtitle": "让心跳接入加速的世界，下一首由你决定。",
+    "eyebrow": "ACCEL WORLD / BLACK LOTUS",
+    "motto": "World End",
+    "vertical": "",
+    "sceneNumber": "",
+    "sceneTitle": "",
+    "sectionNumber": ""
+  },
+  "fonts": {
+    "name": "",
+    "signature": "",
+    "heading": "",
+    "subtitle": "",
+    "eyebrow": "",
+    "motto": "",
+    "vertical": "",
+    "sceneNumber": "",
+    "sceneTitle": "",
+    "sectionNumber": ""
+  },
+  "character": {
+    "image": "assets/d9e3717519ce406d69248b74423756ef.webp",
+    "scale": 0.9,
+    "x": 50,
+    "y": 78,
+    "flip": false,
+    "visible": true
+  },
+  "background": {
+    "scale": 1,
+    "x": 0,
+    "y": 0,
+    "image": "",
+    "dim": 0.65
+  },
+  "layout": {
+    "characterSide": "left",
+    "characterRatio": 0.35,
+    "introHeight": 100,
+    "cardOpacity": 0.96
+  },
+  "decorations": {
+    "glow": 0.42,
+    "rings": true,
+    "fade": 0.12,
+    "signature": true
+  },
+  "capture": {
+    "background": "#100D1B",
+    "card": "#21182F",
+    "fontSize": 14,
+    "compact": true
+  },
+  "id": "black-lotus-violet-resonance"
+}

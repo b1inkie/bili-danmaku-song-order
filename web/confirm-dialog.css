@@ -1,0 +1,10 @@
+.confirm-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px; background: var(--backdrop, #0009); backdrop-filter: blur(8px); }
+.confirm-card { width: min(420px,100%); max-height: calc(100vh - 48px); overflow: auto; padding: 24px; color: var(--text, #f5e9dc); background: var(--card, #211922); border: 1px solid var(--border-strong, #4c333e); border-radius: 20px; box-shadow: var(--shadow-modal, 0 24px 80px #0008); font-family: var(--font, 'Segoe UI', 'Microsoft YaHei', sans-serif); }
+.confirm-card h2 { margin: 0 0 14px; font-size: 17px; font-weight: 600; }
+.confirm-card p { margin: 0; font-size: 13px; line-height: 1.8; color: var(--text-2, #c7acaf); white-space: pre-line; overflow-wrap: anywhere; }
+.confirm-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+.confirm-actions button { padding: 9px 18px; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer; border: 1px solid var(--border-strong, #4c333e); background: transparent; color: var(--text, #f5e9dc); }
+.confirm-actions button:hover { background: var(--hover-overlay, #ffffff0f); }
+.confirm-actions .confirm-danger { color: var(--danger, #ef929b); border-color: var(--danger, #ef929b); background: color-mix(in srgb, var(--danger, #ef929b) 12%, transparent); }
+.confirm-actions .confirm-primary { background: var(--btn-primary-bg, #edd7c2); color: var(--btn-primary-fg, #39202b); }
+.confirm-actions button:focus-visible { outline: 2px solid var(--accent, #dc8c9b); outline-offset: 3px; }

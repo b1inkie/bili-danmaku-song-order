@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <title>B站点歌台 · 直播歌单</title>
+  <link rel="stylesheet" href="capture.css">
+  <link rel="stylesheet" href="theme-custom.css">
+</head>
+<body>
+  <main class="capture-shell">
+    <header class="capture-titlebar pywebview-drag-region"><span class="title-dot"></span><span>直播歌单</span><span class="title-hint">LIVE PLAYLIST</span></header>
+    <nav class="capture-toolbar" aria-label="小窗工具">
+      <button id="btn-opacity" class="tool-button" title="调整透明度" aria-label="调整透明度" aria-expanded="false"><span data-ui-icon="opacity"></span><span id="opacity-label">100%</span></button>
+      <span class="toolbar-divider"></span>
+      <button id="btn-pin" class="tool-button" title="置顶小窗" aria-label="置顶小窗" aria-pressed="false" data-ui-icon="pin"></button>
+      <button id="btn-compact" class="tool-button" title="精简模式" aria-label="精简模式" aria-pressed="false" data-ui-icon="compact"></button>
+      <button id="btn-current" class="tool-button" title="定位当前歌曲" aria-label="定位当前歌曲" data-ui-icon="locate"></button>
+      <button id="btn-hide" class="tool-button tool-hide" title="收起小窗（可从主界面召回）" aria-label="收起小窗" data-ui-icon="minimize"></button>
+    </nav>
+    <div id="opacity-panel" class="opacity-panel hidden">
+      <label for="opacity-range">窗口不透明度 <output id="opacity-output">100%</output></label>
+      <input id="opacity-range" type="range" min="40" max="100" step="5" value="100">
+      <div class="opacity-presets"><button data-opacity="40">40%</button><button data-opacity="70">70%</button><button data-opacity="100">100%</button></div>
+    </div>
+    <section class="current-card" aria-label="当前播放">
+      <div class="current-label"><span class="playing-dot"></span><span id="current-state">等待连接网易云</span></div>
+      <h1 id="current-name">尚未播放</h1>
+      <p id="current-singer"></p>
+    </section>
+    <header class="list-head"><h2>歌曲列表</h2><span id="song-count">0 首</span></header>
+    <p id="connection-note" role="status">等待连接网易云</p>
+    <ol id="songs" aria-label="歌曲列表"><li class="empty">连接网易云后显示歌单</li></ol>
+    <p id="tool-message" role="status" aria-live="polite"></p>
+    <div class="resize-edge edge-s" data-edge="s"></div><div class="resize-edge edge-w" data-edge="w"></div><div class="resize-edge edge-e" data-edge="e"></div>
+    <div class="resize-edge edge-nw" data-edge="nw"></div><div class="resize-edge edge-ne" data-edge="ne"></div><div class="resize-edge edge-sw" data-edge="sw"></div><div class="resize-edge edge-se" data-edge="se"></div>
+  </main>
+  <script src="icons.js"></script>
+  <script src="theme-runtime.js"></script>
+  <script src="capture.js"></script>
+</body>
+</html>

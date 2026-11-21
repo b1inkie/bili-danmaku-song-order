@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+  <title>B站点歌台</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="haruka.css">
+  <link rel="stylesheet" href="playlist.css">
+  <link rel="stylesheet" href="confirm-dialog.css">
+  <link rel="stylesheet" href="theme-custom.css">
+  <link rel="stylesheet" href="update-preview.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+
+    <!-- ============ 登录遮罩 ============ -->
+    <div id="login-view" class="login-view">
+      <div class="login-card">
+        <div class="login-logo" data-ui-icon="music" aria-hidden="true"></div>
+        <h1 class="login-title">B站点歌台</h1>
+        <p class="login-sub" id="login-sub">正在检查本地登录状态…</p>
+
+        <div id="qr-box" class="qr-box hidden">
+          <img id="qr-img" alt="登录二维码">
+          <p class="qr-tip">使用哔哩哔哩手机 APP 扫码</p>
+        </div>
+
+        <div id="confirm-box" class="confirm-box hidden">
+          <p class="confirm-text">检测到账号<br><b id="confirm-uname"></b></p>
+          <div class="login-actions">
+            <button class="btn btn-primary" id="btn-use-account">使用该账号</button>
+            <button class="btn btn-ghost" id="btn-switch-account">切换账号</button>
+          </div>
+        </div>
+
+        <p class="login-hint" id="login-hint">登录后自动连接你的直播间弹幕</p>
+      </div>
+    </div>
+
+    <!-- ============ 主界面 ============ -->
+    <header class="windowbar pywebview-drag-region">
+      <div class="drag-area">
+        <span class="brand-dot"></span><span class="brand-name">B站点歌台</span>
+        <span class="conn" id="conn"><i class="conn-dot"></i><span id="conn-text">未连接</span></span>
+        <button class="chip" id="room-chip" title="点击在浏览器打开直播间">房间 —</button>
+        <span class="chip" id="account-chip">未登录</span>
+      </div>
+      <div class="top-actions">
+        <div class="theme-picker">
+          <button class="btn btn-ghost btn-small" id="btn-theme" title="选择主题" aria-haspopup="menu" aria-expanded="false">主题</button>
+          <div class="theme-menu hidden" id="theme-menu" role="menu" aria-label="界面主题">
+            <button data-theme-choice="dark" role="menuitemradio"><span class="theme-swatch swatch-dark"></span>经典 · 深色</button>
+            <button data-theme-choice="light" role="menuitemradio"><span class="theme-swatch swatch-light"></span>经典 · 浅色</button>
+            <button id="btn-theme-workshop" role="menuitem">主题工坊 · 制作 / 导入</button>
+          </div>
+        </div>
+        <button class="player-connection" id="btn-player-connect" data-state="checking" title="检测网易云连接" aria-live="polite">
+          <span class="player-connection-dot" aria-hidden="true"></span><span id="player-connection-text">网易云 · 检测中</span>
+        </button>
+        <button class="btn btn-ghost btn-small" id="btn-settings" aria-label="设置">设置<span id="settings-update-badge" class="settings-update-badge hidden" aria-hidden="true"></span></button>
+        <span class="win-divider"></span>
+        <button class="win-btn" id="btn-min" title="最小化" aria-label="最小化" data-ui-icon="minimize"></button>
+        <button class="win-btn" id="btn-max" title="最大化／还原" aria-label="最大化／还原" data-ui-icon="maximize"></button>
+        <button class="win-btn win-close" id="btn-close" title="关闭" aria-label="关闭" data-ui-icon="close"></button>
+      </div>
+    </header>
+
+    <div class="background-signature" aria-hidden="true"><span>这里是名字</span><em>这里是签名</em></div>
+
+    <aside class="haruka-scene" aria-hidden="true">
+      <div class="haruka-orbit orbit-one"></div><div class="haruka-orbit orbit-two"></div>
+      <div class="haruka-vertical theme-decoration">这里是竖排文案</div>
+      <img class="haruka-oc" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="" draggable="false">
+      <div class="haruka-name"><span>这里是名字</span><em>这里是签名</em><small>这里是签名说明</small></div>
+      <div class="haruka-scene-number"><span class="scene-index theme-decoration">01</span> <span class="scene-title theme-decoration">这里是主题名</span></div>
+    </aside>
+    <section class="haruka-intro">
+      <p class="haruka-eyebrow"><span></span> 这里是引导语</p>
+      <h1>这里是主标题</h1>
+      <p class="haruka-description">这里是副标题</p>
+      <div class="haruka-rule"><span>✦</span></div>
+    </section>
+
+    <main class="panels">
+      <section class="panel queue-panel">
+        <header class="panel-head">
+          <h2><span class="haruka-section-no theme-decoration">01</span> 歌单 <span class="panel-meta" id="queue-count">0 首</span></h2>
+          <div class="playlist-header-actions">
+            <button class="song-action" id="btn-playlist-toggle" title="播放／暂停" aria-label="播放／暂停" disabled data-ui-icon="play"></button>
+            <button class="song-action" id="btn-skip" title="下一首" aria-label="下一首" data-ui-icon="next" disabled></button>
+            <button class="song-action song-delete" id="btn-playlist-clear" title="清空当前列表" aria-label="清空当前列表" data-ui-icon="trash" disabled></button>
+          </div>
+        </header>
+        <div class="now-playing" id="now-playing">
+          <span class="now-playing-indicator" aria-hidden="true" data-ui-icon="music"></span>
+          <div class="now-playing-info"><span id="now-playing-state">网易云实时歌单</span><strong id="now-playing-name">尚未播放</strong></div>
+        </div>
+        <div class="playlist-sync"><span id="playlist-sync-note">等待连接网易云</span><span id="request-feedback" aria-live="polite"></span></div>
+        <div class="panel-body" id="queue-list">
+          <div class="empty">连接网易云后显示歌单<br><span>弹幕发送「点歌 歌名 - 歌手」试试，歌手可省略</span></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="actionbar">
+      <div class="request-area">
+        <div class="request-inputs">
+          <input id="input-song" placeholder="歌名" autocomplete="off">
+          <input id="input-singer" placeholder="歌手（可选）" autocomplete="off">
+          <button class="btn btn-primary" id="btn-request">点歌</button>
+        </div>
+        <div class="capture-actions action-group" aria-label="点歌控制与直播歌单小窗">
+          <button class="btn btn-ghost btn-small" id="btn-capture-toggle" aria-pressed="false">召唤小窗</button>
+          <button class="btn btn-ghost btn-small" id="btn-capture-reset" title="将歌单小窗移回当前屏幕的可见位置">重置小窗位置</button>
+          <button class="player-connection listen-status" id="btn-listen" data-state="offline" aria-pressed="false"><span class="player-connection-dot" aria-hidden="true"></span><span>已暂停 · 恢复</span></button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============ 设置弹窗 ============ -->
+    <div id="modal-settings" class="modal hidden">
+      <div class="modal-card">
+        <header class="modal-head">
+          <h2>设置</h2>
+          <button class="icon-btn" id="btn-close-settings" title="关闭" aria-label="关闭设置" data-ui-icon="close"></button>
+        </header>
+        <div class="modal-body">
+          <section class="settings-section update-demo" id="update-demo" aria-labelledby="update-demo-heading">
+            <div class="settings-heading"><h3 id="update-demo-heading">版本与更新</h3><span class="update-demo-tag" id="update-mode-tag">GitHub 正式发布</span></div>
+            <p class="setting-note update-demo-warning" id="update-mode-notice">检查本项目 GitHub 发布的新版本，签名验证后下载，用户确认后退出安装。</p>
+            <dl class="update-demo-versions">
+              <div><dt>当前版本</dt><dd id="update-demo-current">读取当前版本…</dd></div>
+              <div><dt>最新版本</dt><dd id="update-demo-latest">—</dd></div>
+              <div><dt>上一版本</dt><dd id="update-demo-backup">无</dd></div>
+              <div><dt>上次检查</dt><dd id="update-demo-time">尚未检查</dd></div>
+            </dl>
+            <div class="update-demo-result"><span id="update-demo-status" data-phase="idle">未检查</span><p id="update-demo-message" role="status" aria-live="polite">尚未检查。</p></div>
+            <div id="update-demo-notes" class="update-demo-notes hidden"></div>
+            <div id="update-demo-progress-box" class="update-demo-progress-box hidden"><progress id="update-demo-progress" max="100" value="0" aria-label="模拟下载进度"></progress><span id="update-demo-percent">0%</span></div>
+            <div class="update-demo-actions">
+              <button class="btn btn-ghost btn-small" id="update-demo-check">模拟检查</button>
+              <button class="btn btn-primary btn-small hidden" id="update-demo-download">模拟下载</button>
+              <button class="btn btn-ghost btn-small hidden" id="update-demo-cancel">取消下载</button>
+              <button class="btn btn-primary btn-small hidden" id="update-demo-install">模拟重启更新</button>
+              <button class="btn btn-ghost btn-small" id="update-demo-rollback" disabled>模拟回退</button>
+              <button class="btn btn-ghost btn-small hidden" id="update-recover">恢复中断的更新</button>
+            </div>
+            <div class="update-demo-scenarios hidden" id="update-demo-scenarios"><label for="update-demo-scenario">预览场景</label><select id="update-demo-scenario"><option value="available">发现新版</option><option value="latest">已是最新版</option><option value="check-error">检查失败</option><option value="download-error">下载失败</option></select><button class="btn btn-ghost btn-small" id="update-demo-reset">重置演示</button></div>
+            <p class="setting-note" id="update-schedule-note">启动5秒后检查，此后每4小时检查。</p>
+          </section>
+          <section class="settings-section">
+            <div class="settings-heading"><h3>直播间</h3><span class="settings-caption">弹幕点歌来源</span></div>
+            <label class="setting-label" for="input-roomid">直播间房间号</label>
+            <div class="setting-row">
+              <input id="input-roomid" placeholder="请输入数字房间号" inputmode="numeric">
+              <button class="btn btn-primary btn-small" id="btn-save-roomid">保存并连接</button>
+            </div>
+            <p class="setting-note">未设置时使用登录账号的直播间；修改后点击保存并连接。</p>
+          </section>
+
+          <section class="settings-section">
+            <div class="settings-heading"><h3>账号</h3><span class="settings-caption">哔哩哔哩</span></div>
+            <div class="setting-account-row">
+              <p class="setting-account" id="account-note">当前：—</p>
+              <button class="btn btn-ghost btn-small" id="btn-rescan">切换账号</button>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <div class="settings-heading"><h3>点歌队列限制</h3><span class="settings-caption">消费队列模式</span></div>
+            <label class="queue-limit-switch"><input type="checkbox" id="queue-limit-enabled">启用点歌列表最大数限制</label>
+            <label class="setting-label" for="queue-limit-maximum">最多歌曲数（含正在播放）</label>
+            <div class="setting-row"><input type="number" id="queue-limit-maximum" min="1" max="500" value="10"><button class="btn btn-primary btn-small" id="btn-save-queue-policy">保存设置</button></div>
+            <p class="setting-note">启用后按列表顺序播放，播完或点下一首后移除上一首，暂停不移除；满额拒绝新点歌（含手动点歌）。现有超额歌曲保留，不自动裁剪。影响网易云当前队列，不删除收藏/文件。关闭后不再清理，播放模式保持顺序。</p>
+          </section>
+          <section class="settings-section">
+            <div class="settings-heading"><h3>歌曲黑名单</h3><span class="settings-caption">保存后立即生效</span></div>
+            <label class="setting-label" for="input-blacklist">每行填写一个完整歌名</label>
+            <textarea id="input-blacklist" rows="4" spellcheck="false" placeholder="青花瓷&#10;最炫民族风"></textarea>
+            <div class="setting-section-actions">
+              <button class="btn btn-primary btn-small" id="btn-save-blacklist">保存黑名单</button>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <div class="settings-heading"><h3>播放器</h3><span class="settings-caption">网易云音乐</span></div>
+            <p class="setting-player-status" id="player-status">尚未检测播放器</p>
+            <p class="setting-note">通过顶栏的网易云按钮连接。首次连接需先退出网易云，再点击该按钮以控制模式启动。歌曲权限由客户端账号决定，不读取或导出账号 Cookie。</p>
+          </section>
+          <section class="settings-section">
+            <div class="settings-heading"><h3>作者</h3><span class="settings-caption">B站</span></div>
+            <button class="setting-author-link" id="btn-author-bilibili" title="在浏览器中打开作者的B站主页">https://space.bilibili.com/1160389658 <span aria-hidden="true">↗</span></button>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div id="toasts"></div>
+
+    <!-- 无边框窗口缩放手柄 -->
+    <div class="rh rh-n" data-rh="n"></div>
+    <div class="rh rh-s" data-rh="s"></div>
+    <div class="rh rh-w" data-rh="w"></div>
+    <div class="rh rh-e" data-rh="e"></div>
+    <div class="rh rh-nw" data-rh="nw"></div>
+    <div class="rh rh-ne" data-rh="ne"></div>
+    <div class="rh rh-sw" data-rh="sw"></div>
+    <div class="rh rh-se" data-rh="se"></div>
+  </div>
+  <script src="icons.js"></script>
+  <script src="theme-runtime.js"></script>
+  <script src="confirm-dialog.js"></script>
+  <script src="update-preview.js"></script>
+  <script src="updater.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

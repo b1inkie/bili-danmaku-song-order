@@ -1,0 +1,257 @@
+/* Optional theme. Classic dark/light rules in style.css remain unchanged. */
+.theme-picker { position: relative; }
+.theme-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 228px;
+  padding: 7px;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  box-shadow: var(--shadow-modal);
+  max-height: min(70vh, 460px);
+  overflow-y: auto;
+}
+.theme-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 10px;
+  color: var(--text-2);
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.theme-menu button:hover, .theme-menu button[aria-checked="true"] {
+  color: var(--text);
+  background: var(--hover-overlay);
+}
+.theme-menu button[aria-checked="true"]::after { content: "✓"; margin-left: auto; }
+.theme-context-menu {
+  position: fixed; z-index: 250; min-width: 156px; padding: 5px;
+  background: var(--card); border: 1px solid var(--border-strong);
+  border-radius: 12px; box-shadow: var(--shadow-modal);
+}
+.theme-delete-action {
+  display: flex; align-items: center; gap: 9px; width: 100%; padding: 10px 12px;
+  background: transparent; color: var(--danger); border: 0; border-radius: 8px;
+  font: inherit; font-size: 12px; text-align: left; cursor: pointer;
+}
+.theme-delete-action:hover, .theme-delete-action:focus-visible { background: var(--hover-overlay); }
+.theme-delete-action:disabled { opacity: .5; cursor: default; }
+.theme-swatch { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #ffffff38; }
+.swatch-dark { background: #141416; }
+.swatch-light { background: #eeeeef; }
+.swatch-haruka { background: linear-gradient(135deg, #b84e61, #3a1c2a); }
+.haruka-scene, .haruka-intro, .haruka-section-no { display: none; }
+/* 通用主题不展示主播签名；Haruka 品牌仅在专属主题中出现。 */
+.background-signature { display: none; }
+
+html[data-theme="haruka"] {
+  --bg: #110e14;
+  --card: #201820;
+  --card-2: #2a2028;
+  --border: rgba(229, 175, 166, 0.13);
+  --border-strong: #4c333e;
+  --text: #f5e9dc;
+  --text-2: #c7acaf;
+  --muted: #a38690;
+  --accent: #dc8c9b;
+  --accent-strong: #f4b5ba;
+  --accent-dim: rgba(199, 100, 125, 0.15);
+  --ok: #aac5ac;
+  --warn: #d6b77e;
+  --danger: #ef929b;
+  --btn-primary-bg: #edd7c2;
+  --btn-primary-fg: #39202b;
+  --btn-primary-hover: #fff0de;
+  --hover-overlay: rgba(235, 186, 171, 0.07);
+  --shadow-panel: 0 16px 42px #08060b30;
+  --shadow-modal: 0 24px 100px #08060bd9;
+  --backdrop: rgba(14, 9, 17, 0.72);
+  color-scheme: dark;
+}
+
+html[data-theme="haruka"] #app {
+  display: grid;
+  grid-template-columns: 43% minmax(0, 1fr);
+  grid-template-rows: 55px 118px minmax(180px, 1fr) auto 20px;
+  column-gap: 30px;
+  row-gap: 12px;
+  padding: 0 38px 0 20px;
+  background:
+    radial-gradient(ellipse at 14% 44%, #70334840 0%, transparent 50%),
+    radial-gradient(ellipse at 98% 0%, #61303f28 0%, transparent 48%),
+    linear-gradient(120deg, #1e111b, #121016 54%, #18121a);
+}
+html[data-theme="haruka"] #app::after {
+  content: "MUSIC REQUEST";
+  position: absolute;
+  right: 40px;
+  bottom: 12px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: #ad8b955e;
+  pointer-events: none;
+}
+html[data-theme="haruka"] .windowbar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin: 0 -38px 0 -20px;
+  padding: 0 18px;
+  background: #120e1459;
+  border-bottom: 1px solid #e0a9ad0a;
+}
+html[data-theme="haruka"] .brand-name { font-size: 13px; letter-spacing: 0.08em; }
+html[data-theme="haruka"] .brand-dot { width: 7px; height: 7px; box-shadow: 0 0 12px #cf7a8d70; }
+html[data-theme="haruka"] .chip { background: #ffffff04; border-color: #ddb5aa14; }
+html[data-theme="haruka"] .background-signature { display: none; }
+
+html[data-theme="haruka"] .haruka-scene {
+  display: block;
+  position: absolute;
+  top: 55px;
+  bottom: 0;
+  left: 0;
+  /* 仅用栏宽定位人物；允许OC自然延伸，功能区始终绘制在其上层。 */
+  width: calc(43% - 18px);
+  z-index: 0;
+  isolation: isolate;
+  overflow: visible;
+  pointer-events: none;
+  user-select: none;
+}
+html[data-theme="haruka"] .haruka-intro,
+html[data-theme="haruka"] .panels,
+html[data-theme="haruka"] .actionbar { position: relative; z-index: 1; }
+.haruka-scene::before {
+  content: "";
+  position: absolute;
+  width: 82%;
+  aspect-ratio: 1;
+  left: 9%;
+  top: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #a5546840, #582b4530 52%, transparent 72%);
+  filter: blur(24px);
+}
+.haruka-scene::after {
+  content: "";
+  position: absolute;
+  /* 底部渐变铺满窗口背景，不在人物栏交界形成垂直切线。 */
+  top: 0; bottom: 0; left: 0; width: 100vw;
+  background: linear-gradient(0deg, #160f18 0%, #160f18e6 8%, #160f1800 38%);
+}
+.haruka-oc {
+  position: absolute;
+  height: calc(100% + 180px);
+  width: auto;
+  max-width: none;
+  bottom: -190px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 8px 28px #09060b75);
+}
+.haruka-orbit { position: absolute; border: 1px solid #e8b5a622; border-radius: 50%; }
+.orbit-one { width: 80%; aspect-ratio: 1; top: 9%; left: 7%; }
+.orbit-two { width: 91%; aspect-ratio: 1; top: 5%; left: 2%; border-style: dashed; opacity: 0.35; }
+.haruka-vertical {
+  position: absolute;
+  top: 60px;
+  left: 23px;
+  writing-mode: vertical-rl;
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  color: #c4929b80;
+}
+.haruka-name { position: absolute; bottom: 77px; left: 48px; z-index: 1; transform: rotate(-7deg); }
+.haruka-name > span {
+  font-family: "STXingkai", "华文行楷", "KaiTi", cursive;
+  font-size: clamp(58px, 6.5vw, 94px);
+  line-height: 1;
+  color: #f8e5d6;
+  text-shadow: 0 2px 22px #170e19b3;
+}
+.haruka-name em {
+  display: block;
+  margin: -6px 0 0 65px;
+  font-family: "Freestyle Script", "Lucida Handwriting", cursive;
+  font-size: clamp(60px, 7vw, 100px);
+  font-weight: normal;
+  line-height: 0.9;
+  color: #dda3ac;
+}
+.haruka-name small { display: block; margin: 22px 0 0 8px; font-size: 8px; letter-spacing: 0.25em; color: #d2aea58c; }
+.haruka-scene-number { position: absolute; z-index: 1; left: 40px; bottom: 24px; font-family: Georgia, serif; color: #c19b9e; font-size: 19px; }
+.haruka-scene-number span { font-family: var(--font); font-size: 8px; letter-spacing: 0.16em; color: #a27a8578; }
+
+html[data-theme="haruka"] .haruka-intro { display: block; grid-column: 2; grid-row: 2; align-self: start; padding-top: 6px; }
+.haruka-eyebrow { font-size: 9px; letter-spacing: 0.28em; color: #ca9b9c; display: flex; align-items: center; gap: 10px; }
+.haruka-eyebrow > span { height: 1px; width: 24px; background: #b57d89; }
+.haruka-intro h1 { font-family: "STZhongsong", "SimSun", serif; font-weight: 400; font-size: clamp(27px, 2.6vw, 34px); letter-spacing: 0.06em; margin: 10px 0 8px; }
+.haruka-description { font-size: 12px; letter-spacing: 0.13em; color: #a98b94; }
+.haruka-rule { display: flex; align-items: center; gap: 10px; margin-top: 12px; color: #ba8c8c; font-size: 10px; }
+.haruka-rule::before { content: ""; width: 48px; height: 1px; background: #b17a7d70; }
+.haruka-rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, #b17a7d30, transparent); }
+
+html[data-theme="haruka"] .panels { grid-column: 2; grid-row: 3; width: 100%; min-height: 0; }
+html[data-theme="haruka"] .queue-panel {
+  background: linear-gradient(125deg, #34232b80, #1b1720a6);
+  border: 1px solid #c7949229;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+}
+html[data-theme="haruka"] .panel-head { padding: 16px 20px; border-color: #c4948f19; }
+html[data-theme="haruka"] .panel-head h2 { font-size: 13px; letter-spacing: 0.12em; font-weight: 500; }
+html[data-theme="haruka"] .haruka-section-no { display: inline; font-family: Georgia, serif; font-size: 12px; color: #ae7e89; margin-right: 8px; }
+.haruka-scene-number .scene-index { font-family: Georgia, serif; font-size: 19px; letter-spacing: normal; color: inherit; }
+.scene-title:not(:empty)::before { content: '／ '; }
+.haruka-section-no:not(:empty)::after { content: ' /'; }
+.theme-decoration:empty { display: none !important; }
+.haruka-scene-number:has(.scene-index:empty):has(.scene-title:empty) { display: none; }
+html[data-theme="haruka"] .panel-meta { color: #b49298; font-size: 11px; }
+html[data-theme="haruka"] .empty { font-size: 13px; color: #c0a0a5; gap: 12px; }
+html[data-theme="haruka"] .empty span { font-size: 11px; letter-spacing: 0.04em; }
+html[data-theme="haruka"] .q-icon { background: #d68b9820; border: 1px solid #d68b9815; }
+html[data-theme="haruka"] .queue-item { padding: 12px 9px; }
+html[data-theme="haruka"] .src-wy { color: #e7abae; background: #d078881c; }
+html[data-theme="haruka"] .actionbar {
+  grid-column: 2;
+  grid-row: 4;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 14px;
+  gap: 12px;
+  background: #241a22a6;
+  border-color: #c7949229;
+  border-radius: 18px;
+}
+html[data-theme="haruka"] .capture-actions.action-group { justify-content: flex-start; }
+html[data-theme="haruka"] .capture-actions.action-group > button { min-height: 30px; height: 30px; font-size: 11px; }
+html[data-theme="haruka"] .request-inputs input { background: #120e155e; border-color: #b88d8d24; font-size: 12px; }
+html[data-theme="haruka"] .btn-primary { box-shadow: 0 3px 16px #c8857c0f; }
+html[data-theme="haruka"] .login-card { background: linear-gradient(130deg, #2d1f29, #1b1520); border-color: #c7949233; }
+html[data-theme="haruka"] .login-logo { color: #e4b7b3; background: #a0546826; }
+html[data-theme="haruka"] .modal-card { background: #211922; }
+
+@media (max-height: 680px) {
+  html[data-theme="haruka"] #app { grid-template-rows: 55px 100px minmax(155px, 1fr) auto 12px; row-gap: 10px; }
+  .haruka-intro h1 { font-size: 27px; margin-top: 8px; }
+  .haruka-rule { margin-top: 9px; }
+  .haruka-name { bottom: 60px; }
+}
+@media (max-width: 1000px) {
+  html[data-theme="haruka"] #app { grid-template-columns: 39% minmax(0, 1fr); padding-right: 24px; column-gap: 20px; }
+  html[data-theme="haruka"] .windowbar { margin-right: -24px; }
+  html[data-theme="haruka"] .haruka-scene { width: calc(39% - 5px); }
+  .haruka-name { left: 32px; }
+  .haruka-name small { font-size: 7px; letter-spacing: 0.15em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="haruka"] *, html[data-theme="haruka"] *::before, html[data-theme="haruka"] *::after { animation: none !important; transition: none !important; }
+}
