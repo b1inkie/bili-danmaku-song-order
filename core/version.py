@@ -1,5 +1,5 @@
 """Release identity. Change only together with an intentional release build."""
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 UPDATER_VERSION = 2
 APP_NAME = "bili-danmaku-song-order"
 EXE_NAME = APP_NAME + ".exe"

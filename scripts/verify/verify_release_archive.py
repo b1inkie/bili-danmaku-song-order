@@ -27,6 +27,12 @@ for name in names:
 import json
 manifest=json.loads(archive.extract(mapping['web/themes/presets.json']))
 assert set(manifest['themes'])=={'black-lotus-violet-resonance','strelizia-twilight-resonance'}
+template=json.loads(archive.extract(mapping['web/themes/rose-nocturne.json']))
+assert template['text']['name']=='这里是名字' and template['text']['signature']=='这里是签名'
+assert template['character']['image']==''
+for filename in ('web/index.html','web/theme.schema.json','web/themes/rose-nocturne.json','web/haruka.css'):
+    content=archive.extract(mapping[filename]).decode('utf-8')
+    assert '渚花遥' not in content and "HARUKA'S MUSIC ROOM" not in content,filename
 pyz=archive.open_embedded_archive('PYZ.pyz')
 for module in ('core.player','core.netease_runtime','core.queue_runtime','core.theme_manager','core.theme_workshop','core.theme_catalog','core.capture_window','core.updater','core.update_protocol','core.version','cryptography','PIL.Image','jsonschema'):
     assert module in pyz.toc,module
